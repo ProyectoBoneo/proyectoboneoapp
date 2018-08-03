@@ -1,21 +1,27 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { createStackNavigator } from 'react-navigation';
+import { View } from 'react-native';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+
+import HomeView from 'boneo/src/components/home/Home';
+import LoginView from 'boneo/src/components/auth/Login';
+import RootReducer from 'boneo/src/reducers/index';
+
+const StackNavigator = createStackNavigator({
+    Login: { screen: LoginView },
+    Home: { screen: HomeView }
+});
+
+const store = createStore(RootReducer, applyMiddleware(thunk));
 
 export default class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Esto es mobile</Text>
-      </View>
-    );
-  }
+    render () {
+        return (<Provider store={store}>
+            <View>
+                <LoginView/>
+            </View>
+        </Provider>);
+    }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
