@@ -9,11 +9,11 @@ class LoginView extends React.Component {
         return (
             <View>
                 <TextInput placeholder='usuario'
-                           onChange={ e => this.props.dispatch(formInputChanged({username: e.target.value})) }
+                           onChangeText={ text => this.props.dispatch(formInputChanged({username: text})) }
                 />
                 <TextInput textContentType='password'
                            placeholder='password'
-                           onChange={ e => this.props.dispatch(formInputChanged({password: e.target.value})) }
+                           onChangeText={ text => this.props.dispatch(formInputChanged({password: text})) }
                 />
                 <Button title='Login' onPress={ () => this.props.dispatch(login(this.props.username, this.props.password)) }/>
                 { this.props.token && <Text>Your token is { this.props.token }</Text> }

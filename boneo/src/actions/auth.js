@@ -1,15 +1,14 @@
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const INPUT_CHANGE = 'INPUT_CHANGE';
 
-const loginSuccess = ({token}) => {
+const loginSuccess = (response) => {
     return {
         type: LOGIN_SUCCESS,
-        token
+        token: response.token
     }
 };
 
 export const formInputChanged = (inputChange) => {
-    console.warn('Input change is ' + JSON.stringify(inputChange));
     return {
         type: INPUT_CHANGE,
         inputChange
@@ -30,7 +29,6 @@ export const login = (username, password) => {
                     password
                 }),
             }
-        ).then(
-            response => dispatch(loginSuccess(response.json()))
-         );
+        ).then(response => response.json()
+        ).then(responseJson => dispatch(loginSuccess(responseJson)));
 };
