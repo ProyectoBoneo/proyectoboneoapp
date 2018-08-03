@@ -1,14 +1,15 @@
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const INPUT_CHANGE = 'INPUT_CHANGE';
 
-const loginSuccess = (token) => {
+const loginSuccess = ({token}) => {
     return {
         type: LOGIN_SUCCESS,
         token
     }
 };
 
-export const inputChange = (inputChange) => {
+export const formInputChanged = (inputChange) => {
+    console.warn('Input change is ' + JSON.stringify(inputChange));
     return {
         type: INPUT_CHANGE,
         inputChange
@@ -17,7 +18,7 @@ export const inputChange = (inputChange) => {
 
 export const login = (username, password) => {
     return dispatch =>
-         fetch('http://192.168.0.33:8000/api/get_token/',
+         fetch('http://10.0.2.2:8000/api/get_token/',
             {
                 method: 'POST',
                 headers: {
@@ -30,6 +31,6 @@ export const login = (username, password) => {
                 }),
             }
         ).then(
-            response => dispatch(loginSuccess(JSON.parse(response.text)))
-        ).catch(response => console.warn('This response sucks: ' + response.text));
+            response => dispatch(loginSuccess(response.json()))
+         );
 };

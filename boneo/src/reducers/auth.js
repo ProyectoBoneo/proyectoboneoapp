@@ -11,6 +11,7 @@ const initialState = {
 export default function(state = initialState, action) {
     switch (action.type) {
         case INPUT_CHANGE:
+            console.warn('Input change is ' + JSON.stringify(action));
             return {
                 ...state,
                 input: {...state.input, ...action.inputChange}
