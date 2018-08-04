@@ -1,12 +1,16 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {Text} from 'react-native';
+import NavigationContainer from 'boneo/src/components/navigation/NavigationContainer';
 
 class EstadoAcademicoView extends React.Component {
+    static navigationOptions = {
+        drawerLabel: 'Estado Académico',
+    };
     render() {
         return (
-            <View>
-                <Text>Estado Academico</Text>
-            </View>
+            <NavigationContainer navigation={ this.props.navigation }>
+                <Text>Estado academico</Text>
+            </NavigationContainer>
         );
     }
 }

@@ -1,11 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+
+import { retrieveToken } from 'boneo/src/actions/auth';
 import LoginView from 'boneo/src/components/auth/LoginView';
 import NavigationView from 'boneo/src/components/navigation/NavigationView';
 
 
 class AuthHandler extends React.Component {
+    componentWillMount() {
+        this.props.dispatch(retrieveToken());
+    }
     render() {
         return this.props.token ? <NavigationView/> : <LoginView/>;
     }

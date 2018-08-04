@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-import { TextInput, Button, View, Text } from 'react-native';
+import { TextInput, Button, View } from 'react-native';
 import { formInputChanged, login } from 'boneo/src/actions/auth';
 
 class LoginView extends React.Component {

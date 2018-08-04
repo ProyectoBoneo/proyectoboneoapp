@@ -1,4 +1,4 @@
-import {LOGIN_SUCCESS, INPUT_CHANGE} from 'boneo/src/actions/auth';
+import {LOGIN_SUCCESS, LOGOUT_SUCCESS, INPUT_CHANGE, RETRIEVE_TOKEN_SUCCESS} from 'boneo/src/actions/auth';
 
 const initialState = {
     input: {
@@ -20,6 +20,13 @@ export default function(state = initialState, action) {
                 ...state,
                 token: action.token
             };
+        case RETRIEVE_TOKEN_SUCCESS:
+            return {
+                ...state,
+                token: action.token
+            };
+        case LOGOUT_SUCCESS:
+            return initialState;
     }
     return state;
 };
