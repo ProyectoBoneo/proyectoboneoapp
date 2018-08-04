@@ -16,7 +16,6 @@ class LoginView extends React.Component {
                            onChangeText={ text => this.props.dispatch(formInputChanged({password: text})) }
                 />
                 <Button title='Login' onPress={ () => this.props.dispatch(login(this.props.username, this.props.password)) }/>
-                { this.props.token && <Text>Your token is { this.props.token }</Text> }
             </View>
         );
     }
@@ -24,15 +23,13 @@ class LoginView extends React.Component {
 
 LoginView.propTypes = {
     username: PropTypes.string,
-    password: PropTypes.string,
-    token: PropTypes.string
+    password: PropTypes.string
 };
 
 const mapStateToProps = (state) => {
     return {
         username: state.auth.input.username,
-        password: state.auth.input.password,
-        token: state.auth.token
+        password: state.auth.input.password
     };
 };
 
