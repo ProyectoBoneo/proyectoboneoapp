@@ -37,37 +37,36 @@ const retrieveTokenSuccess = (token) => {
 
 
 export const retrieveToken = () => {
-    return (dispatch, getState, api) => {
+    return (dispatch, getState, {api}) => {
         return AsyncStorage.getItem(USER_TOKEN, () => {}).then(
             (token) => {
-                api.defaults.headers.common['Authorization'] = `Token ${token}`;
-                dispatch(retrieveTokenSuccess(token));
+                if (token) {
+                    api.defaults.headers.common['Authorization'] = `Token ${token}`;
+                    dispatch(retrieveTokenSuccess(token));
+                }
             }
         );
     }
 };
 
 export const login = (username, password) => {
-    return (dispatch, getState, api) =>
+    return (dispatch, getState, {api}) =>
         api.post('/get_token/',
             {
-                data: {
-                    username,
-                    password
-                },
+                username,
+                password
             }
         ).then(response => {
-            const responseJson = JSON.parse(response.data);
-            api.defaults.headers.common['Authorization'] = `Token ${responseJson.token}`;
-            return AsyncStorage.setItem(USER_TOKEN, responseJson.token).then(
-                () => dispatch(loginSuccess(responseJson.token))
+            api.defaults.headers.common['Authorization'] = `Token ${response.data.token}`;
+            return AsyncStorage.setItem(USER_TOKEN, response.data.token).then(
+                () => dispatch(loginSuccess(response.data.token))
             );
         });
 };
 
 export const logout = () => {
-    return (dispatch, getState, api) => {
-        delete api.defaults.common['Authorization'];
+    return (dispatch, getState, {api}) => {
+        delete api.defaults.headers.common['Authorization'];
         AsyncStorage.clear().then(
             () => dispatch(logoutSuccess())
         )
