@@ -37,39 +37,39 @@ const retrieveTokenSuccess = (token) => {
 
 
 export const retrieveToken = () => {
-    return dispatch => {
+    return (dispatch, getState, api) => {
         return AsyncStorage.getItem(USER_TOKEN, () => {}).then(
-            (token) => dispatch(retrieveTokenSuccess(token))
+            (token) => {
+                api.defaults.headers.common['Authorization'] = `Token ${token}`;
+                dispatch(retrieveTokenSuccess(token));
+            }
         );
     }
 };
 
 export const login = (username, password) => {
-    return dispatch =>
-        fetch('http://10.0.2.2:8000/api/get_token/',
+    return (dispatch, getState, api) =>
+        api.post('/get_token/',
             {
-                method: 'POST',
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
+                data: {
                     username,
                     password
-                }),
+                },
             }
-        ).then(response => response.json()
-        ).then(responseJson => {
-            const token = responseJson.token;
-            return AsyncStorage.setItem(USER_TOKEN, token).then(
-                () => dispatch(loginSuccess(token))
+        ).then(response => {
+            const responseJson = JSON.parse(response.data);
+            api.defaults.headers.common['Authorization'] = `Token ${responseJson.token}`;
+            return AsyncStorage.setItem(USER_TOKEN, responseJson.token).then(
+                () => dispatch(loginSuccess(responseJson.token))
             );
         });
 };
 
 export const logout = () => {
-    return dispatch =>
+    return (dispatch, getState, api) => {
+        delete api.defaults.common['Authorization'];
         AsyncStorage.clear().then(
             () => dispatch(logoutSuccess())
         )
+    }
 };
