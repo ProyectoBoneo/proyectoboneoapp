@@ -60,7 +60,7 @@ export const login = (username, password) => {
             api.defaults.headers.common['Authorization'] = `Token ${response.data.token}`;
             return AsyncStorage.setItem(USER_TOKEN, response.data.token).then(
                 () => dispatch(loginSuccess(response.data.token))
-            );
+            )
         });
 };
 
