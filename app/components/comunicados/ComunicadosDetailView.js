@@ -4,21 +4,30 @@ import PropTypes from 'prop-types';
 
 import MainStyles from 'app/styles/MainStyles';
 
+import { markAsRead } from 'app/actions/comunicados';
+
 
 class ComunicadosDetailView extends React.Component {
+    componentDidMount() {
+        if (!this.props.comunicadoRecibido.fecha_leido) {
+            this.props.dispatch(markAsRead(this.props.comunicadoRecibido));
+        }
+    }
     render() {
+        const comunicado = this.props.comunicadoRecibido.comunicado;
         return (
             <View>
-                <Text style={ MainStyles.title } >{ this.props.comunicado.comunicado.asunto }</Text>
-                <Text style={ MainStyles.text }>{ this.props.comunicado.comunicado.mensaje }</Text>
-                <Text style={ MainStyles.text }>{ this.props.comunicado.comunicado.emisor.nombre }</Text>
+                <Text style={ MainStyles.title } >{ comunicado.asunto }</Text>
+                <Text style={ MainStyles.text }>{ comunicado.mensaje }</Text>
+                <Text style={ MainStyles.text }>{ comunicado.emisor.nombre }</Text>
             </View>
         );
     }
 }
 
 ComunicadosDetailView.propTypes = {
-    comunicado: PropTypes.object.isRequired
+    dispatch: PropTypes.func.isRequired,
+    comunicadoRecibido: PropTypes.object.isRequired
 };
 
 export default ComunicadosDetailView;

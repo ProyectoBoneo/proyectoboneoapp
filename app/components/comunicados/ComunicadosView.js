@@ -25,7 +25,10 @@ class ComunicadosView extends React.Component {
         return (
             <NavigationContainer navigation={ this.props.navigation } title='Comunicados' onBackButton={ onBackButton }>
                 { this.state.selectedComunicado ?
-                    <ComunicadosDetailView comunicado={ this.state.selectedComunicado }/> :
+                    <ComunicadosDetailView
+                        dispatch={ this.props.dispatch }
+                        comunicadoRecibido={ this.state.selectedComunicado }
+                    /> :
                     <ComunicadosListView
                         comunicados={ this.props.comunicados }
                          onPressItem={ (selectedComunicado) => this.setState({selectedComunicado}) }

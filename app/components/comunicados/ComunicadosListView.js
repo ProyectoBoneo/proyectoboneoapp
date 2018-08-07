@@ -7,14 +7,17 @@ import MainStyles from 'app/styles/MainStyles';
 
 class ComunicadoItem extends React.PureComponent {
     render() {
+        const comunicado = this.props.comunicadoRecibido.comunicado;
+        const subjectStyle = [ComunicadosStyles.comunicadoItemAsunto,
+            !this.props.comunicadoRecibido.fecha_leido && ComunicadosStyles.comunicadoItemAsuntoNoLeido];
         return (
-            <TouchableOpacity onPress={ () => this.props.onPressItem(this.props.comunicado) }>
+            <TouchableOpacity onPress={ () => this.props.onPressItem(this.props.comunicadoRecibido) }>
                 <View style={ ComunicadosStyles.comunicadoItemView }>
                     <View style={ ComunicadosStyles.comunicadoItemAsuntoView }>
-                        <Text style={ ComunicadosStyles.comunicadoItemAsunto }>{ this.props.comunicado.comunicado.asunto }</Text>
-                        <Text style={ ComunicadosStyles.comunicadoItemEmisor }>{ this.props.comunicado.comunicado.emisor.nombre }</Text>
+                        <Text style={ subjectStyle }>{ comunicado.asunto }</Text>
+                        <Text style={ ComunicadosStyles.comunicadoItemEmisor }>{ comunicado.emisor.nombre }</Text>
                     </View>
-                    <Text style={ ComunicadosStyles.comunicadoItemFecha }>{ this.props.comunicado.comunicado.fecha }</Text>
+                    <Text style={ ComunicadosStyles.comunicadoItemFecha }>{ comunicado.fecha }</Text>
                 </View>
             </TouchableOpacity>
         );
@@ -22,7 +25,7 @@ class ComunicadoItem extends React.PureComponent {
 }
 
 ComunicadoItem.propTypes = {
-    comunicado: PropTypes.object,
+    comunicadoRecibido: PropTypes.object,
     selected: PropTypes.bool,
     onPressItem: PropTypes.func,
 };
@@ -36,7 +39,7 @@ class ComunicadosListView extends React.Component {
                     data={ this.props.comunicados }
                     keyExtractor={ (item, index) => item.id.toString() }
                     renderItem={ ({item}) => <ComunicadoItem
-                        comunicado={ item }
+                        comunicadoRecibido={ item }
                         onPressItem={ this.props.onPressItem }
                     />}
                 />

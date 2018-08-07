@@ -21,6 +21,9 @@ export default StyleSheet.create({
         width: 150,
         fontSize: 16,
     },
+    comunicadoItemAsuntoNoLeido: {
+        fontWeight: 'bold',
+    },
     comunicadoItemFecha: {
         width: 150,
         fontSize: 12,
