@@ -1,6 +1,9 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {Text} from 'react-native';
 import NavigationContainer from 'app/components/navigation/NavigationContainer';
+
+import MainStyles from 'app/styles/MainStyles';
+
 
 class HomeView extends React.Component {
     static navigationOptions = {
@@ -9,7 +12,7 @@ class HomeView extends React.Component {
     render() {
         return (
             <NavigationContainer navigation={ this.props.navigation }>
-                <Text>Home</Text>
+                <Text style={ MainStyles.title } >Home</Text>
             </NavigationContainer>
         );
     }

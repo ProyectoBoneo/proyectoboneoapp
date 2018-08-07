@@ -1,22 +1,34 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-import { TextInput, Button, View } from 'react-native';
+import { TextInput, Button, View, Text } from 'react-native';
 import { formInputChanged, login } from 'app/actions/auth';
+
+import MainStyles from 'app/styles/MainStyles';
+
 
 class LoginView extends React.Component {
     render() {
         return (
             <View>
-                <TextInput placeholder='usuario'
-                           onChangeText={ text => this.props.dispatch(formInputChanged({username: text})) }
+                <Text style={ MainStyles.title }>Inicio de sesión</Text>
+                <TextInput
+                    style={ MainStyles.textInput }
+                    placeholder='usuario'
+                    onChangeText={ text => this.props.dispatch(formInputChanged({username: text})) }
                 />
-                <TextInput textContentType='password'
-                           placeholder='password'
-                           secureTextEntry={ true }
-                           onChangeText={ text => this.props.dispatch(formInputChanged({password: text})) }
+                <TextInput
+                    style={ MainStyles.textInput }
+                    textContentType='password'
+                    placeholder='password'
+                    secureTextEntry={ true }
+                    onChangeText={ text => this.props.dispatch(formInputChanged({password: text})) }
                 />
-                <Button title='Login' onPress={ () => this.props.dispatch(login(this.props.username, this.props.password)) }/>
+                <Button
+                    style={ MainStyles.button }
+                    title='Login'
+                    onPress={ () => this.props.dispatch(login(this.props.username, this.props.password)) }
+                />
             </View>
         );
     }

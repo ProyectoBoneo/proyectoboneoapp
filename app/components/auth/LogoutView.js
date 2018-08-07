@@ -4,6 +4,9 @@ import { connect } from 'react-redux';
 import { logout } from 'app/actions/auth';
 import NavigationContainer from 'app/components/navigation/NavigationContainer';
 
+import MainStyles from 'app/styles/MainStyles';
+
+
 class LogoutView extends React.Component {
     static navigationOptions = {
         drawerLabel: 'Cerrar sesión',
@@ -11,8 +14,9 @@ class LogoutView extends React.Component {
     render() {
         return (
             <NavigationContainer navigation={ this.props.navigation }>
-                <Text>¿ Desea cerrar sesión ?</Text>
-                <Button title='Cerrar sesión' onPress={ () => this.props.dispatch(logout()) }/>
+                <Text style={ MainStyles.title }>Confirmar cierre de sesión</Text>
+                <Text style={ MainStyles.text }>¿ Desea cerrar su sesión ?</Text>
+                <Button style={ MainStyles.button } title='Cerrar sesión' onPress={ () => this.props.dispatch(logout()) }/>
             </NavigationContainer>
         );
     }
