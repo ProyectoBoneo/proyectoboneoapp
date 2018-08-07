@@ -11,6 +11,7 @@ class ComunicadosDetailView extends React.Component {
             <View>
                 <Text style={ MainStyles.title } >{ this.props.comunicado.comunicado.asunto }</Text>
                 <Text style={ MainStyles.text }>{ this.props.comunicado.comunicado.mensaje }</Text>
+                <Text style={ MainStyles.text }>{ this.props.comunicado.comunicado.emisor.nombre }</Text>
             </View>
         );
     }
