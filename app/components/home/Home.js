@@ -11,8 +11,8 @@ class HomeView extends React.Component {
     };
     render() {
         return (
-            <NavigationContainer navigation={ this.props.navigation }>
-                <Text style={ MainStyles.title } >Home</Text>
+            <NavigationContainer navigation={ this.props.navigation } title='Boneo'>
+                <Text style={ MainStyles.text } >Bienvenido al sistema Boneo</Text>
             </NavigationContainer>
         );
     }

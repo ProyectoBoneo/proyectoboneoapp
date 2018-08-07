@@ -10,7 +10,10 @@ class ComunicadoItem extends React.PureComponent {
         return (
             <TouchableOpacity onPress={ () => this.props.onPressItem(this.props.comunicado) }>
                 <View style={ ComunicadosStyles.comunicadoItemView }>
-                    <Text style={ ComunicadosStyles.comunicadoItemAsunto }>{ this.props.comunicado.comunicado.asunto }</Text>
+                    <View style={ ComunicadosStyles.comunicadoItemAsuntoView }>
+                        <Text style={ ComunicadosStyles.comunicadoItemAsunto }>{ this.props.comunicado.comunicado.asunto }</Text>
+                        <Text style={ ComunicadosStyles.comunicadoItemEmisor }>{ this.props.comunicado.comunicado.emisor.nombre }</Text>
+                    </View>
                     <Text style={ ComunicadosStyles.comunicadoItemFecha }>{ this.props.comunicado.comunicado.fecha }</Text>
                 </View>
             </TouchableOpacity>
@@ -28,7 +31,6 @@ class ComunicadosListView extends React.Component {
     render() {
         return (
             <View>
-                <Text style={ MainStyles.title }>Comunicados</Text>
                 <FlatList
                     style={ MainStyles.listView }
                     data={ this.props.comunicados }

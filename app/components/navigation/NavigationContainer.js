@@ -1,15 +1,18 @@
 import React from 'react';
 import { View } from 'react-native';
-import { Header } from 'react-native-elements';
 import PropTypes from 'prop-types';
+
+import NavigationHeader from 'app/components/navigation/NavigationHeader';
+
 
 class NavigationContainer extends React.Component {
     render () {
         return (
             <View>
-                <Header
-                    leftComponent={{ icon: 'menu', color: '#fff', onPress: () => { this.props.navigation.openDrawer() } }}
-                    centerComponent={{ text: 'Boneo', style: { color: '#fff' } }}
+                <NavigationHeader
+                    onBackButton={ this.props.onBackButton }
+                    navigation={ this.props.navigation }
+                    title={ this.props.title }
                 />
                 { this.props.children }
             </View>
@@ -18,8 +21,10 @@ class NavigationContainer extends React.Component {
 }
 
 NavigationContainer.propTypes = {
+    onBackButton: PropTypes.func,
     navigation: PropTypes.object.isRequired,
     children: PropTypes.oneOf(PropTypes.object, PropTypes.array),
+    title: PropTypes.string.isRequired
 };
 
 export default NavigationContainer;

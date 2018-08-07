@@ -13,8 +13,7 @@ class LogoutView extends React.Component {
     };
     render() {
         return (
-            <NavigationContainer navigation={ this.props.navigation }>
-                <Text style={ MainStyles.title }>Confirmar cierre de sesión</Text>
+            <NavigationContainer navigation={ this.props.navigation } title='Cierre de sesión'>
                 <Text style={ MainStyles.text }>¿ Desea cerrar su sesión ?</Text>
                 <Button style={ MainStyles.button } title='Cerrar sesión' onPress={ () => this.props.dispatch(logout()) }/>
             </NavigationContainer>

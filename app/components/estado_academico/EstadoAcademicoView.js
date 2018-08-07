@@ -11,8 +11,8 @@ class EstadoAcademicoView extends React.Component {
     };
     render() {
         return (
-            <NavigationContainer navigation={ this.props.navigation }>
-                <Text style={ MainStyles.title }>Estado academico</Text>
+            <NavigationContainer navigation={ this.props.navigation } title='Estado académico'>
+                <Text style={ MainStyles.text }>Aquí verá su estado académico</Text>
             </NavigationContainer>
         );
     }

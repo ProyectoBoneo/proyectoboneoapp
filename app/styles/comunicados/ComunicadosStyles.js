@@ -7,14 +7,27 @@ export default StyleSheet.create({
     },
     comunicadoItemView: {
         flex: 1,
+        alignItems: 'flex-start',
         justifyContent: 'space-between',
         flexDirection: 'row',
         height: 50
     },
+    comunicadoItemAsuntoView: {
+        flex: 1,
+        justifyContent: 'flex-start',
+        flexDirection: 'column'
+    },
     comunicadoItemAsunto: {
-        width: 150
+        width: 150,
+        fontSize: 16,
     },
     comunicadoItemFecha: {
-        width: 150
-    }
+        width: 150,
+        fontSize: 12,
+        textAlign: 'right'
+    },
+    comunicadoItemEmisor: {
+        width: 150,
+        fontSize: 12,
+    },
 });

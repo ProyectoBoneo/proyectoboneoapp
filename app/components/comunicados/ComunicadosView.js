@@ -17,25 +17,13 @@ class ComunicadosView extends React.Component {
         super(props);
         this.state = { selectedComunicado: null };
     }
-    handleBackPress = () => {
-        if (this.state.selectedComunicado) {
-            this.setState({selectedComunicado: null});
-            return true;
-        }
-        return false;
-    };
-    componentDidMount() {
-        BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
-    }
-    componentWillUnmount() {
-        BackHandler.removeEventListener('hardwareBackPress', this.handleBackPress);
-    }
     componentWillMount() {
         this.props.dispatch(retrieveComunicados());
     }
     render() {
+        const onBackButton = this.state.selectedComunicado ? () => this.setState({selectedComunicado: null}) : null;
         return (
-            <NavigationContainer navigation={ this.props.navigation }>
+            <NavigationContainer navigation={ this.props.navigation } title='Comunicados' onBackButton={ onBackButton }>
                 { this.state.selectedComunicado ?
                     <ComunicadosDetailView comunicado={ this.state.selectedComunicado }/> :
                     <ComunicadosListView
