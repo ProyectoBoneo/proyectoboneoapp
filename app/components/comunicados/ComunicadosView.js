@@ -1,10 +1,13 @@
 import React from 'react';
-import { ListView, Text } from 'react-native';
+import {BackHandler} from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { retrieveComunicados } from 'app/actions/comunicados';
 import NavigationContainer from 'app/components/navigation/NavigationContainer';
+import ComunicadosListView from 'app/components/comunicados/ComunicadosListView';
+import ComunicadosDetailView from 'app/components/comunicados/ComunicadosDetailView';
+
 
 class ComunicadosView extends React.Component {
     static navigationOptions = {
@@ -12,7 +15,20 @@ class ComunicadosView extends React.Component {
     };
     constructor(props) {
         super(props);
-        this.listViewDataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+        this.state = { selectedComunicado: null };
+    }
+    handleBackPress = () => {
+        if (this.state.selectedComunicado) {
+            this.setState({selectedComunicado: null});
+            return true;
+        }
+        return false;
+    };
+    componentDidMount() {
+        BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
+    }
+    componentWillUnmount() {
+        BackHandler.removeEventListener('hardwareBackPress', this.handleBackPress);
     }
     componentWillMount() {
         this.props.dispatch(retrieveComunicados());
@@ -20,11 +36,14 @@ class ComunicadosView extends React.Component {
     render() {
         return (
             <NavigationContainer navigation={ this.props.navigation }>
-                <Text>Comunicados</Text>
-                <ListView
-                    dataSource={ this.listViewDataSource.cloneWithRows(this.props.comunicados) }
-                    renderRow={(comunicadoModel) => <Text>{ comunicadoModel.comunicado.asunto }</Text>}
-                />
+                { this.state.selectedComunicado ?
+                    <ComunicadosDetailView comunicado={ this.state.selectedComunicado }/> :
+                    <ComunicadosListView
+                        comunicados={ this.props.comunicados }
+                         onPressItem={ (selectedComunicado) => this.setState({selectedComunicado}) }
+                    />
+                }
+
             </NavigationContainer>
         );
     }
