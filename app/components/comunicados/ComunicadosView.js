@@ -34,7 +34,6 @@ class ComunicadosView extends React.Component {
                          onPressItem={ (selectedComunicado) => this.setState({selectedComunicado}) }
                     />
                 }
-
             </NavigationContainer>
         );
     }

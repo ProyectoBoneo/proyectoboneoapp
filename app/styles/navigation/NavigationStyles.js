@@ -7,7 +7,7 @@ export default StyleSheet.create({
         color: 'white',
     },
     navigationHeaderView: {
-        height: 50,
+        height: 56,
         backgroundColor: '#2196F3',
         flexDirection: 'row',
         alignItems: 'center'
@@ -18,7 +18,9 @@ export default StyleSheet.create({
     navigationHeaderIcon: {
         color: 'white',
         fontSize: 26,
-        padding: 10,
+        height: 56,
+        width: 56,
         textAlign: 'center',
+        textAlignVertical: 'center',
     }
 });

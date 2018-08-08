@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, TouchableHighlight, BackHandler} from 'react-native';
+import {View, Text, TouchableOpacity, BackHandler} from 'react-native';
 import PropTypes from 'prop-types';
 import FontAwesome, { Icons } from 'react-native-fontawesome';
 
@@ -25,10 +25,10 @@ class NavigationHeader extends React.Component {
         const onPress = this.props.onBackButton || this.props.navigation.openDrawer;
         return (
             <View style={ NavigationStyles.navigationHeaderView }>
-                <TouchableHighlight style={ NavigationStyles.navigationHeaderTouchable }
+                <TouchableOpacity style={ NavigationStyles.navigationHeaderTouchable }
                                     onPress={ onPress } >
                     <FontAwesome style={ NavigationStyles.navigationHeaderIcon }>{ icon }</FontAwesome>
-                </TouchableHighlight>
+                </TouchableOpacity>
                 <Text style={ NavigationStyles.title }>{ this.props.title }</Text>
             </View>
         );

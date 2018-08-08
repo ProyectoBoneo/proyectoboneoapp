@@ -26,7 +26,6 @@ class ComunicadoItem extends React.PureComponent {
 
 ComunicadoItem.propTypes = {
     comunicadoRecibido: PropTypes.object,
-    selected: PropTypes.bool,
     onPressItem: PropTypes.func,
 };
 
