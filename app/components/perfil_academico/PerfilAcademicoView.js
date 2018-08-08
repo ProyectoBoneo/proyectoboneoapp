@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import FontAwesome, { Icons } from 'react-native-fontawesome';
 
 import NavigationContainer from 'app/components/navigation/NavigationContainer';
 import { retrievePerfilAcademico } from 'app/actions/perfilAcademico';
@@ -12,6 +13,9 @@ import PerfilAcademicoDetailListView from 'app/components/perfil_academico/Perfi
 class PerfilAcademicoView extends React.Component {
     static navigationOptions = {
         drawerLabel: 'Perfil Académico',
+        drawerIcon: ({ tintColor }) => (
+            <FontAwesome style={{color: tintColor}}>{ Icons.lineChart }</FontAwesome>
+        ),
     };
     constructor(props) {
         super(props);
