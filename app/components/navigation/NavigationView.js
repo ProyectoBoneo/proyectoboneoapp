@@ -1,6 +1,6 @@
 import { createDrawerNavigator } from 'react-navigation';
 
-import EstadoAcademicoView from 'app/components/estado_academico/EstadoAcademicoView';
+import PerfilAcademicoView from 'app/components/perfil_academico/PerfilAcademicoView';
 import HomeView from 'app/components/home/Home';
 import ComunicadosView from 'app/components/comunicados/ComunicadosView';
 import LogoutView from "app/components/auth/LogoutView";
@@ -8,6 +8,6 @@ import LogoutView from "app/components/auth/LogoutView";
 export default createDrawerNavigator({
     Home: { screen: HomeView },
     Comunicados: { screen: ComunicadosView },
-    EstadoAcademico: { screen: EstadoAcademicoView },
+    PerfilAcademico: { screen: PerfilAcademicoView },
     Logout: { screen: LogoutView }
 });
