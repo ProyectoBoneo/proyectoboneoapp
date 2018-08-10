@@ -1,5 +1,7 @@
 import { AsyncStorage } from 'react-native';
 
+import { userDataRefresh } from 'app/actions/userDataRefresh';
+
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export const INPUT_CHANGE = 'INPUT_CHANGE';
@@ -43,6 +45,7 @@ export const retrieveToken = () => {
                 if (token) {
                     api.defaults.headers.common['Authorization'] = `Token ${token}`;
                     dispatch(retrieveTokenSuccess(token));
+                    dispatch(userDataRefresh());
                 }
             }
         );
@@ -59,7 +62,10 @@ export const login = (username, password) => {
         ).then(response => {
             api.defaults.headers.common['Authorization'] = `Token ${response.data.token}`;
             return AsyncStorage.setItem(USER_TOKEN, response.data.token).then(
-                () => dispatch(loginSuccess(response.data.token))
+                () => {
+                    dispatch(loginSuccess(response.data.token));
+                    dispatch(userDataRefresh());
+                }
             )
         });
 };

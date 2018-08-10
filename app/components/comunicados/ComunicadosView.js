@@ -1,19 +1,26 @@
 import React from 'react';
-import {BackHandler} from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import FontAwesome, { Icons } from 'react-native-fontawesome';
 
 import { retrieveComunicados } from 'app/actions/comunicados';
+import BadgeDrawerLabel from 'app/components/badges/BadgeDrawerLabel';
 import NavigationContainer from 'app/components/navigation/NavigationContainer';
 import ComunicadosListView from 'app/components/comunicados/ComunicadosListView';
 import ComunicadosDetailView from 'app/components/comunicados/ComunicadosDetailView';
 
 
+const mapStateToDrawerLabelProps = (state) => {
+    return {
+        badgeCount: state.comunicados.unreadComunicadosCount
+    }
+};
+
+const ComunicadosDrawerLabel = connect(mapStateToDrawerLabelProps)(BadgeDrawerLabel);
 
 class ComunicadosView extends React.Component {
     static navigationOptions = {
-        drawerLabel: 'Comunicados',
+        drawerLabel: ({ tintColor }) => <ComunicadosDrawerLabel labelText='Comunicados' color={tintColor} />,
         drawerIcon: ({ tintColor }) => (
             <FontAwesome style={{color: tintColor}}>{ Icons.envelope }</FontAwesome>
         ),
