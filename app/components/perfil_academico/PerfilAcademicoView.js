@@ -4,15 +4,25 @@ import PropTypes from 'prop-types';
 import FontAwesome, { Icons } from 'react-native-fontawesome';
 
 import NavigationContainer from 'app/components/navigation/NavigationContainer';
+import BadgeDrawerLabel from 'app/components/badges/BadgeDrawerLabel';
 import { retrievePerfilAcademico } from 'app/actions/perfilAcademico';
 
 import PerfilAcademicoListView from 'app/components/perfil_academico/PerfilAcademicoListView';
 import PerfilAcademicoDetailListView from 'app/components/perfil_academico/PerfilAcademicoDetailListView';
 
 
+const mapStateToDrawerLabelProps = (state) => {
+    return {
+        badgeCount: state.perfilAcademico.unreadUpdatesCount
+    }
+};
+
+const PerfilAcademicoDrawerLabel = connect(mapStateToDrawerLabelProps)(BadgeDrawerLabel);
+
+
 class PerfilAcademicoView extends React.Component {
     static navigationOptions = {
-        drawerLabel: 'Perfil Académico',
+        drawerLabel: ({ tintColor }) => <PerfilAcademicoDrawerLabel labelText='Perfil Académico' color={tintColor} />,
         drawerIcon: ({ tintColor }) => (
             <FontAwesome style={{color: tintColor}}>{ Icons.lineChart }</FontAwesome>
         ),

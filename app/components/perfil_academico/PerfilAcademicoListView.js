@@ -3,16 +3,17 @@ import {FlatList, Text, TouchableOpacity, View} from 'react-native';
 import PropTypes from 'prop-types';
 
 import MainStyles from 'app/styles/MainStyles';
-import PerfilAcademicoStyles from "app/styles/perfil_academico/PerfilAcademicoStyles";
+import PerfilAcademicoStyles from 'app/styles/perfil_academico/PerfilAcademicoStyles';
 
 
 class PerfilAcademicoItem extends React.PureComponent {
     render() {
+        const textStyle = this.props.perfilMateria.unreadUpdatesCount > 0 && PerfilAcademicoStyles.perfilAcademicoTextNoLeido;
         return (
             <TouchableOpacity onPress={ () => this.props.onPressItem(this.props.perfilMateria) }>
                 <View style={ PerfilAcademicoStyles.perfilAcademicoItemView }>
-                    <Text>{ this.props.perfilMateria.nombre_materia }</Text>
-                    <Text>{ this.props.perfilMateria.promedio }</Text>
+                    <Text style={ textStyle }>{ this.props.perfilMateria.nombre_materia }</Text>
+                    <Text style={ textStyle }>{ this.props.perfilMateria.promedio }</Text>
                 </View>
             </TouchableOpacity>
         );

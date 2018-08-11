@@ -8,4 +8,7 @@ export default StyleSheet.create({
         flexDirection: 'row',
         height: 50
     },
+    perfilAcademicoTextNoLeido: {
+        fontWeight: 'bold',
+    },
 });

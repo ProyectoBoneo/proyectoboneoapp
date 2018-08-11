@@ -2,6 +2,7 @@ import React from 'react';
 import {FlatList, Text, TouchableOpacity, View} from 'react-native';
 import PropTypes from 'prop-types';
 
+import { markAsNotified } from 'app/actions/perfilAcademico';
 import MainStyles from 'app/styles/MainStyles';
 import PerfilAcademicoStyles from 'app/styles/perfil_academico/PerfilAcademicoStyles';
 
@@ -27,6 +28,15 @@ PerfilAcademicoDetailItem.propTypes = {
 
 
 class PerfilAcademicoDetailListView extends React.Component {
+    componentWillMount() {
+        this.props.perfilAcademicoMateria.evaluaciones.forEach(
+            (resultadoEvaluacion) => {
+                if (!resultadoEvaluacion.fecha_notificado) {
+                    this.props.dispatch(markAsNotified(resultadoEvaluacion));
+                }
+            }
+        )
+    }
     render() {
         return (
             <View>
